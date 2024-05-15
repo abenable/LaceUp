@@ -5,13 +5,12 @@ import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import helmet from 'helmet';
+import compression from 'compression';
 import hpp from 'hpp';
 import { ErrorHandler } from './controllers/error.js';
-import { authRouter } from './routes/auth.js';
-import { getDirname, limiter } from './utils/util.js';
-import { userRouter } from './routes/user.js';
 import logger from './utils/logger.js';
 import router from './controllers/routes.js';
+import { limiter } from './utils/util.js';
 
 dotenv.config();
 
@@ -34,6 +33,9 @@ app.use(cookieParser());
 
 //Set various HTTP headers to enhance security
 app.use(helmet());
+
+// compression middleware
+app.use(compression());
 
 //Limit repeated requests to prevent abuse
 app.use('/', limiter);
