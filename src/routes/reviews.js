@@ -25,8 +25,8 @@ router.get('/:id', async (req, res, next) => {
             logger.info(`Retrieved review with ID: ${req.params.id}`);
             res.json(review);
         } else {
-            logger.warn(`review with ID: ${req.params.id} not found`);
-            next(new ApiError(404, 'review not found'));
+            logger.warn(`Review with ID: ${req.params.id} not found`);
+            next(new ApiError(404, 'Review not found'));
         }
     } catch (error) {
         logger.error(`Failed to retrieve review with ID: ${req.params.id}`, error);
@@ -54,8 +54,8 @@ router.patch('/:id', async (req, res, next) => {
             logger.info(`Updated review with ID: ${req.params.id}`);
             res.json(updatedreview);
         } else {
-            logger.warn(`review with ID: ${req.params.id} not found`);
-            next(new ApiError(404, 'review not found'));
+            logger.warn(`Review with ID: ${req.params.id} not found`);
+            next(new ApiError(404, 'Review not found'));
         }
     } catch (error) {
         logger.error(`Failed to update review with ID: ${req.params.id}`, error);
@@ -69,10 +69,10 @@ router.delete('/:id', async (req, res, next) => {
         const deletedreview = await ReviewModel.findByIdAndDelete(req.params.id);
         if (deletedreview) {
             logger.info(`Deleted review with ID: ${req.params.id}`);
-            res.json({ message: 'review deleted successfully' });
+            res.json({ message: 'Review deleted successfully' });
         } else {
-            logger.warn(`review with ID: ${req.params.id} not found`);
-            next(new ApiError(404, 'review not found'));
+            logger.warn(`Review with ID: ${req.params.id} not found`);
+            next(new ApiError(404, 'Review not found'));
         }
     } catch (error) {
         logger.error(`Failed to delete review with ID: ${req.params.id}`, error);
