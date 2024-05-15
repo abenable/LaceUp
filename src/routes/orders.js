@@ -1,6 +1,6 @@
 import express from 'express';
 import logger from '../utils/logger.js';
-import CustomerModel from '../models/customers.js';
+import OrderModel from '../models/orders.js';
 import { ApiError } from '../controllers/error.js';
 
 const router = express.Router();
@@ -8,7 +8,7 @@ const router = express.Router();
 // Retrieve all orders
 router.get('/', async (req, res, next) => {
     try {
-        const orders = await CustomerModel.find();
+        const orders = await OrderModel.find();
         logger.info('Retrieved all orders');
         res.json(orders);
     } catch (error) {
@@ -20,7 +20,7 @@ router.get('/', async (req, res, next) => {
 // Retrieve a single order by ID
 router.get('/:id', async (req, res, next) => {
     try {
-        const order = await CustomerModel.findById(req.params.id);
+        const order = await OrderModel.findById(req.params.id);
         if (!order) {
             logger.error('Order not found');
             next(new ApiError(404, 'Order not found'));
@@ -37,7 +37,7 @@ router.get('/:id', async (req, res, next) => {
 // Create a new order
 router.post('/', async (req, res, next) => {
     try {
-        const newOrder = await CustomerModel.create(req.body);
+        const newOrder = await OrderModel.create(req.body);
         logger.info('Created a new order');
         res.status(201).json(newOrder);
     } catch (error) {
@@ -49,7 +49,7 @@ router.post('/', async (req, res, next) => {
 // Update an existing order
 router.patch('/:id', async (req, res, next) => {
     try {
-        const updatedOrder = await CustomerModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        const updatedOrder = await OrderModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
         if (!updatedOrder) {
             logger.error('Order not found');
             next(new ApiError(404, 'Order not found'));
@@ -66,7 +66,7 @@ router.patch('/:id', async (req, res, next) => {
 // Delete an order
 router.delete('/:id', async (req, res, next) => {
     try {
-        const deletedOrder = await CustomerModel.findByIdAndDelete(req.params.id);
+        const deletedOrder = await OrderModel.findByIdAndDelete(req.params.id);
         if (!deletedOrder) {
             logger.error('Order not found');
             next(new ApiError(404, 'Order not found'));
@@ -83,7 +83,7 @@ router.delete('/:id', async (req, res, next) => {
 // Retrieve a single order item by ID
 router.get('/order-items/:id', async (req, res, next) => {
     try {
-        const orderItem = await CustomerModel.findById(req.params.id);
+        const orderItem = await OrderModel.findById(req.params.id);
         if (!orderItem) {
             logger.error('Order item not found');
             next(new ApiError(404, 'Order item not found'));
@@ -100,7 +100,7 @@ router.get('/order-items/:id', async (req, res, next) => {
 // Create a new order item
 router.post('/order-items', async (req, res, next) => {
     try {
-        const newOrderItem = await CustomerModel.create(req.body);
+        const newOrderItem = await OrderModel.create(req.body);
         logger.info('Created a new order item');
         res.status(201).json(newOrderItem);
     } catch (error) {
@@ -112,7 +112,7 @@ router.post('/order-items', async (req, res, next) => {
 // Update an existing order item
 router.patch('/order-items/:id', async (req, res, next) => {
     try {
-        const updatedOrderItem = await CustomerModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        const updatedOrderItem = await OrderModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
         if (!updatedOrderItem) {
             logger.error('Order item not found');
             next(new ApiError(404, 'Order item not found'));
@@ -129,7 +129,7 @@ router.patch('/order-items/:id', async (req, res, next) => {
 // Delete an order item
 router.delete('/order-items/:id', async (req, res, next) => {
     try {
-        const deletedOrderItem = await CustomerModel.findByIdAndDelete(req.params.id);
+        const deletedOrderItem = await OrderModel.findByIdAndDelete(req.params.id);
         if (!deletedOrderItem) {
             logger.error('Order item not found');
             next(new ApiError(404, 'Order item not found'));
