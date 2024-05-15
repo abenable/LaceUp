@@ -21,5 +21,5 @@ const paymentSchema = new mongoose.Schema({
 
 export const OrderModel = mongoose.model("orders", orderSchema);
 export const OrderItemModel = mongoose.model("orderItems", orderItemSchema);
-export const PaymentModel = mongoose.model("payments", orderSchema);
+export const PaymentModel = mongoose.model("payments", paymentSchema);
 
