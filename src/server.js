@@ -6,11 +6,12 @@ import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import helmet from 'helmet';
 import hpp from 'hpp';
-import { ErrorHandler } from './controllers/errorController.js';
-import { authRouter } from './routes/authRoutes.js';
+import { ErrorHandler } from './controllers/error.js';
+import { authRouter } from './routes/auth.js';
 import { getDirname, limiter } from './utils/util.js';
-import { userRouter } from './routes/userRoutes.js';
+import { userRouter } from './routes/user.js';
 import logger from './utils/logger.js';
+import router from './controllers/routes.js';
 
 dotenv.config();
 
@@ -41,12 +42,7 @@ app.use('/', limiter);
 app.use(hpp());
 
 //Routes
-// Authentication routes
-app.use('/auth', authRouter);
-
-// User routes
-app.use('/users', userRouter);
-
+app.use('/', router);
 
 // Error handling middleware
 app.use(ErrorHandler);
