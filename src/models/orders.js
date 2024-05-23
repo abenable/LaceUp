@@ -19,7 +19,8 @@ const paymentSchema = new mongoose.Schema({
     paymentDate: { type: Date, default: Date.now },
 });
 
-export const OrderModel = mongoose.model("orders", orderSchema);
+const OrderModel = mongoose.model("orders", orderSchema);
+export default OrderModel;
 export const OrderItemModel = mongoose.model("orderItems", orderItemSchema);
 export const PaymentModel = mongoose.model("payments", paymentSchema);
 
